@@ -1,0 +1,25 @@
+# openspec/config.yaml
+# Configuración del proyecto para OpenSpec
+# Generado por el Agente Analista de Requerimientos
+
+schema: spec-driven
+
+context: |
+  Proyecto: calculadora-cotizaciones
+  Fecha de inicio: 2026-03-27
+  Generado por: Agente Analista OpenSpec
+
+rules:
+  proposal:
+    - Incluir plan de rollback si aplica
+    - Identificar equipos o áreas afectadas
+  specs:
+    - Usar formato Given/When/Then para todos los escenarios
+    - Usar lenguaje RFC 2119 (SHALL/MUST/SHOULD/MAY)
+    - Cada requerimiento debe tener al menos dos escenarios
+  design:
+    - Incluir diagramas de flujo para flujos complejos
+    - Documentar decisiones de arquitectura con su justificación
+  tasks:
+    - Las tareas deben ser atómicas (máx. 4 horas de trabajo)
+    - Incluir criterios de aceptación medibles
