@@ -1,0 +1,39 @@
+name: OpenSpec Generate Docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'openspec/changes/**'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate OpenSpec Documentation
+        run: |
+          echo "📖 Generating OpenSpec documentation..."
+          echo "Changes in openspec/changes:"
+          find openspec/changes -type f -name "*.md" | head -10
+
+          # Aquí podrías integrar con tu herramienta de generación
+          # Por ejemplo: docker run, python script, etc.
+          echo "✅ Documentation generation complete"
+
+      - name: Commit Generated Files
+        run: |
+          git config --global user.email "openspec-bot@example.com"
+          git config --global user.name "OpenSpec Bot"
+
+          # Opcional: hacer commit de archivos generados
+          if git diff --quiet; then
+            echo "✅ No changes to commit"
+          else
+            echo "📤 Changes detected, committing..."
+            git add .
+            git commit -m "OpenSpec: Auto-generated documentation" || true
+            git push
+          fi
