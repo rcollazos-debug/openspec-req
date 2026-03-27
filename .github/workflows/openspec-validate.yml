@@ -1,0 +1,34 @@
+name: OpenSpec Validate
+
+on:
+  pull_request:
+    paths:
+      - 'openspec/**'
+      - '.github/workflows/openspec-*.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate OpenSpec Structure
+        run: |
+          echo "✅ OpenSpec structure validation"
+          # Verificar que exista openspec/config.yaml
+          if [ ! -f "openspec/config.yaml" ]; then
+            echo "❌ Missing openspec/config.yaml"
+            exit 1
+          fi
+          echo "✅ openspec/config.yaml found"
+
+          # Verificar estructura de cambios
+          if [ -d "openspec/changes" ]; then
+            echo "✅ openspec/changes/ directory found"
+            ls -la openspec/changes/
+          fi
+
+      - name: List OpenSpec Files
+        run: |
+          echo "📁 OpenSpec structure:"
+          find openspec -type f -name "*.md" -o -name "*.yaml" | head -20
